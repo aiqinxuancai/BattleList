@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwfExtractor", "ElectronicO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeVS2012Light", "ElectronicObserverExtended\DockPanelSuite\WinFormsUI\ThemeVS2012Light.csproj", "{4ED4FDB5-9FD0-49E6-876D-1635F727C755}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleListMainWindow", "BattleListMainWindow\BattleListMainWindow.csproj", "{7FE079EA-331D-4710-8BD5-70B395B0BA59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ED4FDB5-9FD0-49E6-876D-1635F727C755}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FE079EA-331D-4710-8BD5-70B395B0BA59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FE079EA-331D-4710-8BD5-70B395B0BA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FE079EA-331D-4710-8BD5-70B395B0BA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FE079EA-331D-4710-8BD5-70B395B0BA59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
