@@ -12,7 +12,7 @@ namespace BattleList
         public string MapName { get; set; }
         public int MapPointId { get; set; }
         public string MapPointName { get; set; }
-        public int WinRankId { get; set; }
+        public int? WinRankId { get; set; }
         public string WinRank { get; set; }
 
         /// <summary>
