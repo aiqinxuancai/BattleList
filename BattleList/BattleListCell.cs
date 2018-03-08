@@ -11,8 +11,11 @@ namespace BattleList
         public DateTime Time { get; set; }
         public string MapName { get; set; }
         public int MapPointId { get; set; }
+
+        /// <summary>
+        /// 类似 1(Boss) 显示
+        /// </summary>
         public string MapPointName { get; set; }
-        public int? WinRankId { get; set; }
         public string WinRank { get; set; }
 
         /// <summary>

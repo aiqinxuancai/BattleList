@@ -21,9 +21,22 @@ namespace BattleListMainWindow
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        private BattleListManager battleListManager ;
+
         public MainWindow()
         {
             InitializeComponent();
+            battleListManager = new BattleListManager();
+            battleListManager.LoadData();
+
+
+            //dataGridMain.DataContext = battleListManager.m_battleList;
+            dataGridMain.ItemsSource = battleListManager.m_battleList;
         }
+
+
+
+
+
     }
 }

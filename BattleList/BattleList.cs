@@ -96,7 +96,7 @@ namespace BattleList
         {
             EasyLogOut.Write("Plugin:OnMapStart");
             Codeplex.Data.DynamicJson json = data;
-            EasyLogOut.Write(data);
+            //EasyLogOut.Write(data);
             try
             {
                 JObject root = JObject.Parse(json.ToString());
@@ -112,7 +112,7 @@ namespace BattleList
         {
             EasyLogOut.Write("Plugin:OnMapNext");
             Codeplex.Data.DynamicJson json = data;
-            EasyLogOut.Write(data);
+           // EasyLogOut.Write(data);
             try
             {
                 JObject root = JObject.Parse(json.ToString());
@@ -121,7 +121,7 @@ namespace BattleList
                 {
                     m_lastStart.Merge(next); //合并点数据
                     EasyLogOut.Write("合并Next完成");
-                    EasyLogOut.Write(m_lastStart.ToString());
+                    EasyLogOut.Write(m_lastStart.ToString(Formatting.Indented));
                 }
             }
             catch (System.Exception ex)
@@ -134,7 +134,7 @@ namespace BattleList
         {
             EasyLogOut.Write("Plugin:OnBattleResult");
             Codeplex.Data.DynamicJson json = data;
-            EasyLogOut.Write(data);
+            //EasyLogOut.Write(data);
             try
             {
                 JObject root = JObject.Parse(json.ToString());
@@ -150,7 +150,7 @@ namespace BattleList
         {
             EasyLogOut.Write("Plugin:OnCombinedBattleResult");
             Codeplex.Data.DynamicJson json = data;
-            EasyLogOut.Write(data);
+            //EasyLogOut.Write(data);
             try
             {
                 JObject root = JObject.Parse(json.ToString());
@@ -177,13 +177,15 @@ namespace BattleList
                 string shipName = root.SelectToken("api_get_ship.api_ship_name")?.ToObject<string>();
                 int point = m_lastStart["api_no"].Value<int>();
                 string mapId = m_lastStart["api_maparea_id"] + "-" + m_lastStart["api_mapinfo_no"]; //3-2
-                bool isBoss = true;
+                bool isBoss = m_lastStart["api_no"].Value<int>() == m_lastStart["api_bosscell_no"].Value<int>();
+
 
                 string mapName = root.SelectToken("api_quest_name")?.ToObject<string>() + $"({mapId})";
-                string mapPointName = root.SelectToken("api_enemy_info.api_deck_name")?.ToObject<string>();
-                int winRankId = (int)root.SelectToken("api_win_rank")?.ToObject<int>();
                 string winRank = root.SelectToken("api_win_rank")?.ToObject<string>();
                 string deckName = root.SelectToken("api_enemy_info.api_deck_name")?.ToObject<string>();
+
+                string mapPointName = isBoss ? point + "(Boss)" : point.ToString();
+
 
                 BattleListCell data = new BattleListCell()
                 {
@@ -192,7 +194,7 @@ namespace BattleList
                     MapPointId = point,
                     MapPointName = mapPointName,
                     NewShipName = shipName,
-                    WinRankId = winRankId,
+
                     WinRank = winRank,
                     DeckName = deckName
                 };

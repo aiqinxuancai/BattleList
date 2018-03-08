@@ -6,9 +6,17 @@
         xmlns:local="clr-namespace:BattleListMainWindow"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="500" Width="800" EnableDWMDropShadow="True">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="293" VerticalAlignment="Top" Width="517" Margin="0,26,0,0"/>
+        <DataGrid x:Name="dataGridMain" AutoGenerateColumns="False" GridLinesVisibility="All">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="时间" Binding="{Binding Time, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" MinWidth="150" />
+                <DataGridTextColumn Header="地图" Binding="{Binding MapName}" MinWidth="150" />
+                <DataGridTextColumn Header="点" Binding="{Binding MapPointName}" MinWidth="80" />
+                <DataGridTextColumn Header="评级" Binding="{Binding WinRank}" MinWidth="80" />
+                <DataGridTextColumn Header="掉落" Binding="{Binding NewShipName}" MinWidth="80" />
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Controls:MetroWindow>
