@@ -198,8 +198,8 @@ namespace BattleList
                     WinRank = winRank,
                     DeckName = deckName
                 };
-
-                m_battleList.Add(data);
+                m_battleList.Insert(0, data);
+                //m_battleList.Add(data);
                 SaveData();
                 return true;
             }

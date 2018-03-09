@@ -8,14 +8,37 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="800" EnableDWMDropShadow="True">
     <Grid>
+        <Grid.Resources>
+            <local:ListLineBossConverter x:Key="ListLineBossConverter"  />
+        </Grid.Resources>
+        
         <DataGrid x:Name="dataGridMain" AutoGenerateColumns="False" GridLinesVisibility="All">
             <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="5" />
                 <DataGridTextColumn Header="时间" Binding="{Binding Time, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" MinWidth="150" />
                 <DataGridTextColumn Header="地图" Binding="{Binding MapName}" MinWidth="150" />
                 <DataGridTextColumn Header="点" Binding="{Binding MapPointName}" MinWidth="80" />
                 <DataGridTextColumn Header="评级" Binding="{Binding WinRank}" MinWidth="80" />
                 <DataGridTextColumn Header="掉落" Binding="{Binding NewShipName}" MinWidth="80" />
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style BasedOn="{StaticResource MetroDataGridRow}" TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding MapPointName, Mode=OneWay, Converter={StaticResource ListLineBossConverter}}" Value="True">
+                            <Setter Property="Background" Value="#FF8B8B" />
+                            <Setter Property="Foreground" Value="DarkRed" />
+                        </DataTrigger>
+                        <!--  IsMouseOver  -->
+                        <!--<MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Price, Mode=OneWay, Converter={StaticResource AlbumPriceIsTooMuchConverter}}" Value="True" />
+                                <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Background" Value="#FFBDBD" />
+                        </MultiDataTrigger>-->
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
 
     </Grid>
