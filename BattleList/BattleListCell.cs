@@ -18,6 +18,8 @@ namespace BattleList
         public string MapPointName { get; set; }
         public string WinRank { get; set; }
 
+        public bool IsBoos { get; set; }
+
         /// <summary>
         /// 掉落的新船的名字
         /// </summary>

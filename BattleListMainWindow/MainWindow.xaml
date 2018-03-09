@@ -5,19 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BattleListMainWindow"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800" EnableDWMDropShadow="True">
+        Title="BattleList" Height="500" Width="800" EnableDWMDropShadow="True">
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands Foreground="White">
+            <Button x:Name="buttonStatisticalData" ToolTip="统计数据" Click="buttonStatisticalData_Click">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Kind="ChartLine" />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="flyoutsControl">
+
+            <Controls:Flyout Header="数据统计" Position="Right" Theme="Accent">
+                <Grid Width="400" Margin="10">
+                    <StackPanel>
+
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
+
+            <Controls:Flyout Position="Right" Theme="Accent">
+                <Grid Width="400" Margin="10">
+                    <StackPanel Width="300" Margin="5 5 5 5" HorizontalAlignment="Left" Orientation="Horizontal">
+                        <Button Width="36" Height="36" FontFamily="Segoe UI Symbol" FontSize="16"
+                                Style="{DynamicResource MahApps.Metro.Styles.MetroCircleButtonStyle}">
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+        
+    
     <Grid>
         <Grid.Resources>
             <local:ListLineBossConverter x:Key="ListLineBossConverter"  />
+            <local:MapPointIsBossVisibility x:Key="MapPointIsBossVisibility"  />
+            
         </Grid.Resources>
         
-        <DataGrid x:Name="dataGridMain" AutoGenerateColumns="False" GridLinesVisibility="All">
+        <DataGrid x:Name="dataGridMain" AutoGenerateColumns="False" GridLinesVisibility="All" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn MinWidth="5" />
                 <DataGridTextColumn Header="时间" Binding="{Binding Time, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" MinWidth="150" />
                 <DataGridTextColumn Header="地图" Binding="{Binding MapName}" MinWidth="150" />
                 <DataGridTextColumn Header="点" Binding="{Binding MapPointName}" MinWidth="80" />
+                <!--<DataGridTemplateColumn Header="点" MinWidth="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="2,0,2,0">
+                                <TextBlock Text="{Binding MapPointId}"  VerticalAlignment="Center"> </TextBlock>
+                                <Image Source="Resources/iconKanBoss.png" Visibility="{Binding MapPointName, Converter={StaticResource MapPointIsBossVisibility}}" Width="18" Height="20"  VerticalAlignment="Center" Margin="2,0,0,0"></Image>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
                 <DataGridTextColumn Header="评级" Binding="{Binding WinRank}" MinWidth="80" />
                 <DataGridTextColumn Header="掉落" Binding="{Binding NewShipName}" MinWidth="80" />
             </DataGrid.Columns>
@@ -28,14 +76,14 @@
                             <Setter Property="Background" Value="#FF8B8B" />
                             <Setter Property="Foreground" Value="DarkRed" />
                         </DataTrigger>
-                        <!--  IsMouseOver  -->
-                        <!--<MultiDataTrigger>
+                          <!--IsMouseOver-->  
+                        <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Price, Mode=OneWay, Converter={StaticResource AlbumPriceIsTooMuchConverter}}" Value="True" />
+                                <Condition Binding="{Binding MapPointName, Mode=OneWay, Converter={StaticResource ListLineBossConverter}}" Value="True" />
                                 <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Background" Value="#FFBDBD" />
-                        </MultiDataTrigger>-->
+                        </MultiDataTrigger>
                     </Style.Triggers>
                 </Style>
             </DataGrid.RowStyle>

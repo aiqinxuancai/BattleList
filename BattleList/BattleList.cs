@@ -194,7 +194,7 @@ namespace BattleList
                     MapPointId = point,
                     MapPointName = mapPointName,
                     NewShipName = shipName,
-
+                    IsBoos = isBoss,
                     WinRank = winRank,
                     DeckName = deckName
                 };
