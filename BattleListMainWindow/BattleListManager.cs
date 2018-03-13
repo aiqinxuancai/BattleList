@@ -13,7 +13,7 @@ namespace BattleListMainWindow
     {
         private static string JSON_PATH_LIST_TEST = @".\list.json";
 
-        private static string JSON_PATH_LIST = @"..\Data\BattleList\list.json";
+        private static string JSON_PATH_LIST = @".\Data\BattleList\list.json";
 
 
         public ArrayList m_battleList;
