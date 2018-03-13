@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\EasyLogOut.cs" />
+    <Compile Include="Base\SQLiteHelper.cs" />
     <Compile Include="BattleList.cs" />
     <Compile Include="BattleListCell.cs" />
     <Compile Include="Plugin.cs" />
@@ -83,6 +84,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Service\SQLiteSaveList.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ElectronicObserverExtended\ElectronicObserver\ElectronicObserver.csproj">

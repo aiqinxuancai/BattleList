@@ -16,6 +16,7 @@ using System.Diagnostics;
 
 namespace BattleList
 {
+    
     public class Plugin : ElectronicObserver.Window.Plugins.DialogPlugin
     {
         public override string MenuTitle => "BattleList";

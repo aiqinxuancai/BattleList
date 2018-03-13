@@ -1,4 +1,5 @@
 ﻿using BattleList.Base;
+using BattleList.Service;
 using ElectronicObserver.Observer;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -26,8 +27,10 @@ namespace BattleList
         }
         private static string JSON_PATH = @".\Data\BattleList";
         private static string JSON_PATH_LIST = @".\Data\BattleList\list.json";
-        private static string SQLITE_PATH_LIST = @".\Data\BattleList\list.sqlite";
+        
         private Plugin plugin;
+
+        private SQLiteSaveList sqliteSaveList;
 
 
         private JObject m_lastStart;
@@ -38,7 +41,10 @@ namespace BattleList
             EasyLogOut.Write("Plugin:初始化BattleList...");
 
             this.plugin = plugin;
-            
+
+            sqliteSaveList = new SQLiteSaveList();
+            sqliteSaveList.Init();
+
             LoadData();
             APIObserver o = APIObserver.Instance;
 
@@ -51,33 +57,7 @@ namespace BattleList
         public void LoadData()
         {
             EasyLogOut.Write("Plugin:LoadData...");
-            try
-            {
-                SQLiteConnection cn = new SQLiteConnection("data source=" + SQLITE_PATH_LIST);
 
-                if (cn.State != System.Data.ConnectionState.Open)
-                {
-                    EasyLogOut.Write("Plugin:LoadData:SQLiteConnection");
-                    //Time = DateTime.Now,
-                    //    MapName = root.SelectToken("api_data.api_quest_name")?.ToObject<string>() + $"({mapId})",
-                    //    MapPointId = point,
-                    //    MapPointName = root.SelectToken("api_data.api_enemy_info.api_deck_name")?.ToObject<string>(),
-                    //    NewShipName = shipName,
-                    //    WinRankId = root.SelectToken("api_data.api_win_rank")?.ToObject<int>(),
-                    //    WinRank = root.SelectToken("api_data.api_win_rank")?.ToObject<string>(),
-                    //    DeckName = root.SelectToken("api_data.api_enemy_info.api_deck_name")?.ToObject<string>()
-
-                    cn.Open();
-                    SQLiteCommand cmd = new SQLiteCommand();
-                    cmd.Connection = cn;
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS battlelist(id int, time DATETIME, score int, mapName TEXT, mapPointId int, mapPointName TEXT, newShipName TEXT, winRankId int, winRank TEXT, deckName TEXT)";
-                    cmd.ExecuteNonQuery();
-                }
-            }
-            catch (System.Exception ex)
-            {
-                EasyLogOut.Write(ex);
-            }
 
             EasyLogOut.Write("Plugin:LoadData:LoadFromJson");
             m_battleList = new ArrayList();
@@ -122,7 +102,7 @@ namespace BattleList
                 {
                     m_lastStart.Merge(next); //合并点数据
                     EasyLogOut.Write("合并Next完成");
-                    EasyLogOut.Write(m_lastStart.ToString(Formatting.Indented));
+                    //EasyLogOut.Write(m_lastStart.ToString(Formatting.Indented));
                 }
             }
             catch (System.Exception ex)
@@ -200,7 +180,9 @@ namespace BattleList
                     DeckName = deckName
                 };
                 m_battleList.Insert(0, data);
-                //m_battleList.Add(data);
+
+                sqliteSaveList.AddData(data);
+
                 SaveData();
                 return true;
             }
