@@ -12,6 +12,7 @@ using System.IO;
 using ElectronicObserver.Window;
 using System.Windows.Forms;
 using BattleList.Base;
+using System.Diagnostics;
 
 namespace BattleList
 {
@@ -22,7 +23,9 @@ namespace BattleList
 
 
         private static string JSON_PATH = @".\Data\BattleList";
-    
+
+        private static string MAINEXE_PATH = @".\Plugins\BattleListMainWindow.exe";
+
         public Plugin()
         {
             EasyLogOut.Write("Plugin:加载中...");
@@ -44,7 +47,13 @@ namespace BattleList
         public override Form GetToolWindow()
         {
             EasyLogOut.Write("Plugin:GetToolWindow调用");
-            return new BattleListMainWindow();
+
+            if (Directory.Exists(MAINEXE_PATH) == false)
+            {
+                Process.Start(MAINEXE_PATH);
+            }
+
+            return null;
         }
     }
 }
