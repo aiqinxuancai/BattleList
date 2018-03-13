@@ -3,6 +3,11 @@
   <Costura >
     <IncludeAssemblies>
       Newtonsoft.Json
+      EntityFramework
+      EntityFramework.SqlServer
+      System.Data.SQLite.EF6
+      System.Data.SQLite.Linq
+      System.Data.SQLite
     </IncludeAssemblies>
   </Costura >
 </Weavers>

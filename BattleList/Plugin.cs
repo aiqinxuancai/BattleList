@@ -35,6 +35,18 @@ namespace BattleList
                 Directory.CreateDirectory(JSON_PATH);
             }
 
+            if (Directory.Exists(@".\x64") == false)
+            {
+                Directory.CreateDirectory(@".\x64");
+                File.WriteAllBytes(@".\x64\SQLite.Interop.dll", Properties.Resources.SQLite_x64_Interop);
+            }
+            if (Directory.Exists(@".\x86") == false)
+            {
+                Directory.CreateDirectory(@".\x86");
+                File.WriteAllBytes(@".\x86\SQLite.Interop.dll", Properties.Resources.SQLite_x86_Interop);
+            }
+
+
             Task.Factory.StartNew(() => BattleList.Instance.Initialize(this));
         }
 
