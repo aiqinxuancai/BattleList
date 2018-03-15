@@ -183,6 +183,17 @@ namespace BattleList
 
                 sqliteSaveList.AddData(data);
 
+
+                //ElectronicObserver.Data.KCDatabase db = ElectronicObserver.Data.KCDatabase.Instance;
+                //ElectronicObserver.Data.Battle.BattleManager bm = db.Battle;
+
+                //JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
+                //jsonSerializerSettings.Error += OnError;
+                //JsonConvert.SerializeObject(bm, jsonSerializerSettings);
+
+                //var jsonStringFromObj = Codeplex.Data.DynamicJson.Serialize(bm);
+                //EasyLogOut.Write(jsonStringFromObj);
+
                 SaveData();
                 return true;
             }
@@ -192,8 +203,11 @@ namespace BattleList
                 return false;
             }
         }
-        
 
+        void OnError(object currentObject, Newtonsoft.Json.Serialization.ErrorContext errorContext)
+        {
+
+        }
 
     }
 }

@@ -53,7 +53,8 @@ namespace BattleList.Service
         {
             SQLiteCommand cmd = new SQLiteCommand();
             cmd.Connection = m_sqliteConnection;
-            cmd.CommandText = "INSERT INTO battlelist(time,mapName,mapPointId,isBoss,mapPointName,newShipName,winRank,deckName) VALUES(@time,@mapName,@mapPointId,@isBoss,@mapPointName,@newShipName,@winRank,@deckName)";
+            cmd.CommandText = "INSERT INTO battlelist(time,mapName,mapPointId,isBoss,mapPointName,newShipName,winRank,deckName) " +
+                                              "VALUES(@time,@mapName,@mapPointId,@isBoss,@mapPointName,@newShipName,@winRank,@deckName)";
             cmd.Parameters.Add("time", DbType.DateTime).Value = battleListCell.Time;
             cmd.Parameters.Add("mapName", DbType.String).Value = battleListCell.MapName;
             cmd.Parameters.Add("mapPointId", DbType.Int32).Value = battleListCell.MapPointId;
