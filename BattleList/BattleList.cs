@@ -167,6 +167,9 @@ namespace BattleList
 
                 string mapPointName = isBoss ? point + "(Boss)" : point.ToString();
 
+                ElectronicObserver.Data.KCDatabase db = ElectronicObserver.Data.KCDatabase.Instance;
+                ElectronicObserver.Data.Battle.BattleManager bm = db.Battle;
+                string fullBattleData = ElectronicObserver.Data.Battle.Detail.BattleDetailDescriptor.GetBattleDetail(bm);
 
                 BattleListCell data = new BattleListCell()
                 {
@@ -177,16 +180,11 @@ namespace BattleList
                     NewShipName = shipName,
                     IsBoos = isBoss,
                     WinRank = winRank,
-                    DeckName = deckName
+                    DeckName = deckName,
+                    FullBattleData = fullBattleData
                 };
                 m_battleList.Insert(0, data);
-
                 sqliteSaveList.AddData(data);
-
-
-                ElectronicObserver.Data.KCDatabase db = ElectronicObserver.Data.KCDatabase.Instance;
-                ElectronicObserver.Data.Battle.BattleManager bm = db.Battle;
-
                 //JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
                 //jsonSerializerSettings.Error += OnError;
                 //JsonConvert.SerializeObject(bm, jsonSerializerSettings);
@@ -196,7 +194,7 @@ namespace BattleList
 
                 SaveData();
 
-                EasyLogOut.Write(ElectronicObserver.Data.Battle.Detail.BattleDetailDescriptor.GetBattleDetail(bm));
+                //EasyLogOut.Write(fullBattleData);
 
                 return true;
             }

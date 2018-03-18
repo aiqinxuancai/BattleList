@@ -29,6 +29,8 @@ namespace BattleList
         /// </summary>
         public string DeckName { get; set; }
 
+        public string FullBattleData { get; set; }
+        
 
 
 

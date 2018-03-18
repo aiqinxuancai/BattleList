@@ -26,19 +26,10 @@ namespace BattleList.Service
                 if (m_sqliteConnection.State != System.Data.ConnectionState.Open)
                 {
                     EasyLogOut.Write("Plugin:LoadData:SQLiteConnection");
-                    //Time = DateTime.Now,
-                    //    MapName = root.SelectToken("api_data.api_quest_name")?.ToObject<string>() + $"({mapId})",
-                    //    MapPointId = point,
-                    //    MapPointName = root.SelectToken("api_data.api_enemy_info.api_deck_name")?.ToObject<string>(),
-                    //    NewShipName = shipName,
-                    //    WinRankId = root.SelectToken("api_data.api_win_rank")?.ToObject<int>(),
-                    //    WinRank = root.SelectToken("api_data.api_win_rank")?.ToObject<string>(),
-                    //    DeckName = root.SelectToken("api_data.api_enemy_info.api_deck_name")?.ToObject<string>()
-
                     m_sqliteConnection.Open();
                     SQLiteCommand cmd = new SQLiteCommand();
                     cmd.Connection = m_sqliteConnection;
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS battlelist(id INTEGER PRIMARY KEY AUTOINCREMENT, time DATETIME, mapName TEXT, mapPointId int, isBoss BOOLEAN, mapPointName TEXT, newShipName TEXT, winRank TEXT, deckName TEXT)";
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS battlelist(id INTEGER PRIMARY KEY AUTOINCREMENT, time DATETIME, mapName TEXT, mapPointId int, isBoss BOOLEAN, mapPointName TEXT, newShipName TEXT, winRank TEXT, deckName TEXT, fullBattleData TEXT)";
                     cmd.ExecuteNonQuery();
                     
                 }
@@ -53,8 +44,8 @@ namespace BattleList.Service
         {
             SQLiteCommand cmd = new SQLiteCommand();
             cmd.Connection = m_sqliteConnection;
-            cmd.CommandText = "INSERT INTO battlelist(time,mapName,mapPointId,isBoss,mapPointName,newShipName,winRank,deckName) " +
-                                              "VALUES(@time,@mapName,@mapPointId,@isBoss,@mapPointName,@newShipName,@winRank,@deckName)";
+            cmd.CommandText = "INSERT INTO battlelist(time,mapName,mapPointId,isBoss,mapPointName,newShipName,winRank,deckName,fullBattleData) " +
+                                              "VALUES(@time,@mapName,@mapPointId,@isBoss,@mapPointName,@newShipName,@winRank,@deckName,@fullBattleData)";
             cmd.Parameters.Add("time", DbType.DateTime).Value = battleListCell.Time;
             cmd.Parameters.Add("mapName", DbType.String).Value = battleListCell.MapName;
             cmd.Parameters.Add("mapPointId", DbType.Int32).Value = battleListCell.MapPointId;
@@ -63,6 +54,8 @@ namespace BattleList.Service
             cmd.Parameters.Add("newShipName", DbType.String).Value = battleListCell.NewShipName;
             cmd.Parameters.Add("winRank", DbType.String).Value = battleListCell.WinRank;
             cmd.Parameters.Add("deckName", DbType.String).Value = battleListCell.DeckName;
+            cmd.Parameters.Add("fullBattleData", DbType.String).Value = battleListCell.FullBattleData;
+
 
             try
             {

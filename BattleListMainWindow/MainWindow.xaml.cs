@@ -32,10 +32,6 @@ namespace BattleListMainWindow
             InitializeComponent();
             battleListManager = new BattleListManager();
             battleListManager.LoadData();
-
-            //_dataSource = new CollectionView(battleListManager.m_battleList);
-            //_dataSource.Filter = (i => ((JObject)i)["MapPointName"].ToString().Contains("Boss"));
-            //dataGridMain.DataContext = _dataSource;
             dataGridMain.ItemsSource = battleListManager.m_battleList;//battleListManager.m_battleList;
         }
 
