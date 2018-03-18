@@ -53,9 +53,9 @@
         <DataGrid x:Name="dataGridMain" AutoGenerateColumns="False" GridLinesVisibility="All" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn MinWidth="5" />
-                <DataGridTextColumn Header="时间" Binding="{Binding Time, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" MinWidth="150" />
-                <DataGridTextColumn Header="地图" Binding="{Binding MapName}" MinWidth="150" />
-                <DataGridTextColumn Header="点" Binding="{Binding MapPointName}" MinWidth="80" />
+                <DataGridTextColumn Header="时间" Binding="{Binding time, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" MinWidth="150" />
+                <DataGridTextColumn Header="地图" Binding="{Binding mapName}" MinWidth="150" />
+                <DataGridTextColumn Header="点" Binding="{Binding mapPointName}" MinWidth="80" />
                 <!--<DataGridTemplateColumn Header="点" MinWidth="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -66,20 +66,20 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>-->
-                <DataGridTextColumn Header="评级" Binding="{Binding WinRank}" MinWidth="80" />
-                <DataGridTextColumn Header="掉落" Binding="{Binding NewShipName}" MinWidth="80" />
+                <DataGridTextColumn Header="评级" Binding="{Binding winRank}" MinWidth="80" />
+                <DataGridTextColumn Header="掉落" Binding="{Binding newShipName}" MinWidth="80" />
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style BasedOn="{StaticResource MetroDataGridRow}" TargetType="{x:Type DataGridRow}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding MapPointName, Mode=OneWay, Converter={StaticResource ListLineBossConverter}}" Value="True">
+                        <DataTrigger Binding="{Binding mapPointName, Mode=OneWay, Converter={StaticResource ListLineBossConverter}}" Value="True">
                             <Setter Property="Background" Value="#FF8B8B" />
                             <Setter Property="Foreground" Value="DarkRed" />
                         </DataTrigger>
                           <!--IsMouseOver-->  
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding MapPointName, Mode=OneWay, Converter={StaticResource ListLineBossConverter}}" Value="True" />
+                                <Condition Binding="{Binding mapPointName, Mode=OneWay, Converter={StaticResource ListLineBossConverter}}" Value="True" />
                                 <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Background" Value="#FFBDBD" />

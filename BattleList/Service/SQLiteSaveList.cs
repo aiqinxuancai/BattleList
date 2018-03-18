@@ -29,7 +29,7 @@ namespace BattleList.Service
                     m_sqliteConnection.Open();
                     SQLiteCommand cmd = new SQLiteCommand();
                     cmd.Connection = m_sqliteConnection;
-                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS battlelist(id INTEGER PRIMARY KEY AUTOINCREMENT, time DATETIME, mapName TEXT, mapPointId int, isBoss BOOLEAN, mapPointName TEXT, newShipName TEXT, winRank TEXT, deckName TEXT, fullBattleData TEXT)";
+                    cmd.CommandText = "CREATE TABLE IF NOT EXISTS battlelist(id INTEGER PRIMARY KEY AUTOINCREMENT, Time DATETIME, MapName TEXT, MapPointId int, IsBoss BOOLEAN, MapPointName TEXT, NewShipName TEXT, WinRank TEXT, DeckName TEXT, FullBattleData TEXT)";
                     cmd.ExecuteNonQuery();
                     
                 }
@@ -44,17 +44,17 @@ namespace BattleList.Service
         {
             SQLiteCommand cmd = new SQLiteCommand();
             cmd.Connection = m_sqliteConnection;
-            cmd.CommandText = "INSERT INTO battlelist(time,mapName,mapPointId,isBoss,mapPointName,newShipName,winRank,deckName,fullBattleData) " +
-                                              "VALUES(@time,@mapName,@mapPointId,@isBoss,@mapPointName,@newShipName,@winRank,@deckName,@fullBattleData)";
-            cmd.Parameters.Add("time", DbType.DateTime).Value = battleListCell.Time;
-            cmd.Parameters.Add("mapName", DbType.String).Value = battleListCell.MapName;
-            cmd.Parameters.Add("mapPointId", DbType.Int32).Value = battleListCell.MapPointId;
-            cmd.Parameters.Add("isBoss", DbType.Boolean).Value = battleListCell.IsBoos;
-            cmd.Parameters.Add("mapPointName", DbType.String).Value = battleListCell.MapPointName;
-            cmd.Parameters.Add("newShipName", DbType.String).Value = battleListCell.NewShipName;
-            cmd.Parameters.Add("winRank", DbType.String).Value = battleListCell.WinRank;
-            cmd.Parameters.Add("deckName", DbType.String).Value = battleListCell.DeckName;
-            cmd.Parameters.Add("fullBattleData", DbType.String).Value = battleListCell.FullBattleData;
+            cmd.CommandText = "INSERT INTO battlelist(Time,MapName,MapPointId,IsBoss,MapPointName,NewShipName,WinRank,DeckName,FullBattleData) " +
+                                              "VALUES(@Time,@MapName,@MapPointId,@IsBoss,@MapPointName,@NewShipName,@WinRank,@DeckName,@FullBattleData)";
+            cmd.Parameters.Add("Time", DbType.DateTime).Value = battleListCell.Time;
+            cmd.Parameters.Add("MapName", DbType.String).Value = battleListCell.MapName;
+            cmd.Parameters.Add("MapPointId", DbType.Int32).Value = battleListCell.MapPointId;
+            cmd.Parameters.Add("IsBoss", DbType.Boolean).Value = battleListCell.IsBoos;
+            cmd.Parameters.Add("MapPointName", DbType.String).Value = battleListCell.MapPointName;
+            cmd.Parameters.Add("NewShipName", DbType.String).Value = battleListCell.NewShipName;
+            cmd.Parameters.Add("WinRank", DbType.String).Value = battleListCell.WinRank;
+            cmd.Parameters.Add("DeckName", DbType.String).Value = battleListCell.DeckName;
+            cmd.Parameters.Add("FullBattleData", DbType.String).Value = battleListCell.FullBattleData;
 
 
             try

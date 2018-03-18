@@ -1,8 +1,11 @@
-﻿using MahApps.Metro.Controls;
+﻿using BattleListMainWindow.Service;
+using MahApps.Metro.Controls;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +28,23 @@ namespace BattleListMainWindow
     {
         private BattleListManager battleListManager ;
 
-        private readonly ICollectionView _dataSource;
+        private SQLiteShowList sqliteShowList;
+
 
         public MainWindow()
         {
             InitializeComponent();
             battleListManager = new BattleListManager();
             battleListManager.LoadData();
-            dataGridMain.ItemsSource = battleListManager.m_battleList;//battleListManager.m_battleList;
+
+            sqliteShowList = new SQLiteShowList();
+            sqliteShowList.Init();
+            
+
+            dataGridMain.ItemsSource = sqliteShowList.LoadData();//battleListManager.m_battleList;//battleListManager.m_battleList;
         }
+
+
 
         private void buttonStatisticalData_Click(object sender, RoutedEventArgs e)
         {
@@ -50,5 +61,7 @@ namespace BattleListMainWindow
 
             flyout.IsOpen = !flyout.IsOpen;
         }
+
+
     }
 }
