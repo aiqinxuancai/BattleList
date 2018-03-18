@@ -30,18 +30,40 @@ namespace BattleListMainWindow
 
         private SQLiteShowList sqliteShowList;
 
-
         public MainWindow()
         {
             InitializeComponent();
-            battleListManager = new BattleListManager();
-            battleListManager.LoadData();
 
             sqliteShowList = new SQLiteShowList();
             sqliteShowList.Init();
-            
 
-            dataGridMain.ItemsSource = sqliteShowList.LoadData();//battleListManager.m_battleList;//battleListManager.m_battleList;
+            //生成Load层
+            Grid gridLoading = new Grid
+            {
+                Background =  new SolidColorBrush(Colors.White)
+            };
+
+            TextBlock textBlockLoad = new TextBlock {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                FontSize = 16,
+                Text = "Loading..."
+            };
+
+            gridLoading.Children.Add(textBlockLoad);
+            
+            this.gridMain.Children.Add(gridLoading);
+
+            //载入数据
+            Task.Run(() => {
+                DataView dataView = sqliteShowList.LoadData();
+                this.Dispatcher.Invoke(() => {
+                    dataGridMain.ItemsSource = dataView;
+                    this.gridMain.Children.Remove(gridLoading);
+                });
+
+            });
+
         }
 
 
@@ -62,6 +84,15 @@ namespace BattleListMainWindow
             flyout.IsOpen = !flyout.IsOpen;
         }
 
+        private void buttonOpenBattleInfo_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            dynamic data = button.DataContext;
 
+            var info = data["FullBattleData"];
+
+            textBlockBattleInfo.Text = info;
+            this.ToggleFlyout(0);
+        }
     }
 }

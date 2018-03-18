@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="BattleList" Height="500" Width="800" EnableDWMDropShadow="True" WindowStartupLocation="CenterScreen">
 
-    <Controls:MetroWindow.RightWindowCommands>
+    <!--<Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands Foreground="White">
             <Button x:Name="buttonStatisticalData" ToolTip="统计数据" Click="buttonStatisticalData_Click">
                 <StackPanel Orientation="Horizontal">
@@ -17,16 +17,17 @@
                 </StackPanel>
             </Button>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>
-    
+    </Controls:MetroWindow.RightWindowCommands>-->
+
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="flyoutsControl">
 
-            <Controls:Flyout Header="数据统计" Position="Right" Theme="Accent">
-                <Grid Width="400" Margin="10">
-                    <StackPanel>
+            <Controls:Flyout Header="战斗详报" Position="Right" Theme="Dark" AnimateOpacity="True" Background="#FF2D9FD1">
+                <Grid Width="500" Margin="10">
+                    <ScrollViewer>
+                        <TextBlock x:Name="textBlockBattleInfo" />
+                    </ScrollViewer>
 
-                    </StackPanel>
                 </Grid>
             </Controls:Flyout>
 
@@ -41,45 +42,46 @@
             </Controls:Flyout>
         </Controls:FlyoutsControl>
     </Controls:MetroWindow.Flyouts>
-        
-    
-    <Grid>
+
+
+    <Grid x:Name="gridMain" >
+
         <Grid.Resources>
             <local:ListLineBossConverter x:Key="ListLineBossConverter"  />
             <local:MapPointIsBossVisibility x:Key="MapPointIsBossVisibility"  />
-            
+
         </Grid.Resources>
-        
+
+
+
         <DataGrid x:Name="dataGridMain" AutoGenerateColumns="False" GridLinesVisibility="All" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn MinWidth="5" />
                 <DataGridTextColumn Header="时间" Binding="{Binding time, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" MinWidth="150" />
                 <DataGridTextColumn Header="地图" Binding="{Binding mapName}" MinWidth="150" />
                 <DataGridTextColumn Header="点" Binding="{Binding mapPointName}" MinWidth="80" />
-                <!--<DataGridTemplateColumn Header="点" MinWidth="80">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="2,0,2,0">
-                                <TextBlock Text="{Binding MapPointId}"  VerticalAlignment="Center"> </TextBlock>
-                                <Image Source="Resources/iconKanBoss.png" Visibility="{Binding MapPointName, Converter={StaticResource MapPointIsBossVisibility}}" Width="18" Height="20"  VerticalAlignment="Center" Margin="2,0,0,0"></Image>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
+
                 <DataGridTextColumn Header="评级" Binding="{Binding winRank}" MinWidth="80" />
                 <DataGridTextColumn Header="掉落" Binding="{Binding newShipName}" MinWidth="80" />
+                <DataGridTemplateColumn Header="详细" MinWidth="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="buttonOpenBattleInfo" Content="查看" Style="{StaticResource LinkButton}" Click="buttonOpenBattleInfo_Click"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style BasedOn="{StaticResource MetroDataGridRow}" TargetType="{x:Type DataGridRow}">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding mapPointName, Mode=OneWay, Converter={StaticResource ListLineBossConverter}}" Value="True">
+                        <DataTrigger Binding="{Binding isBoss}" Value="True">
                             <Setter Property="Background" Value="#FF8B8B" />
                             <Setter Property="Foreground" Value="DarkRed" />
                         </DataTrigger>
-                          <!--IsMouseOver-->  
+                        <!--IsMouseOver-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding mapPointName, Mode=OneWay, Converter={StaticResource ListLineBossConverter}}" Value="True" />
+                                <Condition Binding="{Binding isBoss}" Value="True" />
                                 <Condition Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Background" Value="#FFBDBD" />
