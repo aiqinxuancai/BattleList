@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,15 @@ namespace BattleListMainWindow.Service
         {
             try
             {
-#if DEBUG
-                m_sqliteConnection = new SQLiteConnection(@"data source=.\list.sqlite");
-#else
-                m_sqliteConnection = new SQLiteConnection("data source=" + SQLITE_PATH_LIST);
-#endif
+                if (File.Exists(@".\list.sqlite"))
+                {
+                    m_sqliteConnection = new SQLiteConnection(@"data source=.\list.sqlite");
+                }
+                else
+                {
+                    m_sqliteConnection = new SQLiteConnection("data source=" + SQLITE_PATH_LIST);
+                }
+
                 if (m_sqliteConnection.State != System.Data.ConnectionState.Open)
                 {
                     m_sqliteConnection.Open();
@@ -36,14 +41,19 @@ namespace BattleListMainWindow.Service
 
         public DataView LoadData()
         {
-
-
-            var con = "SELECT * FROM battlelist ORDER BY time DESC";
-            DataSet dataSet = new DataSet();
-            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(con, m_sqliteConnection);
-            dataAdapter.Fill(dataSet);
-            var table = dataSet.Tables[0].DefaultView;
-            return table;
+            try
+            {
+	            var con = "SELECT * FROM battlelist ORDER BY time DESC";
+	            DataSet dataSet = new DataSet();
+	            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(con, m_sqliteConnection);
+	            dataAdapter.Fill(dataSet);
+	            var table = dataSet.Tables[0].DefaultView;
+	            return table;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
 

@@ -66,7 +66,10 @@
                 <DataGridTemplateColumn Header="详细" MinWidth="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="buttonOpenBattleInfo" Content="查看" Style="{StaticResource LinkButton}" Click="buttonOpenBattleInfo_Click"></Button>
+                            <Grid>
+                                <Button x:Name="buttonOpenBattleInfo" Content="查看" Style="{StaticResource LinkButton}" Click="buttonOpenBattleInfo_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF469BE2"></Button>
+                            </Grid>
+                            
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -78,6 +81,9 @@
                             <Setter Property="Background" Value="#FF8B8B" />
                             <Setter Property="Foreground" Value="DarkRed" />
                         </DataTrigger>
+                        <!--<DataTrigger Binding="{Binding Path=IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true">
+                            <Setter Property="Foreground" Value="DarkRed" />
+                        </DataTrigger>-->
                         <!--IsMouseOver-->
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
