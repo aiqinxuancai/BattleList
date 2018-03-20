@@ -93,7 +93,7 @@ namespace BattleList
         {
             EasyLogOut.Write("Plugin:OnMapNext");
             Codeplex.Data.DynamicJson json = data;
-           // EasyLogOut.Write(data);
+            EasyLogOut.Write(data);
             try
             {
                 JObject root = JObject.Parse(json.ToString());
@@ -102,7 +102,7 @@ namespace BattleList
                 {
                     m_lastStart.Merge(next); //合并点数据
                     EasyLogOut.Write("合并Next完成");
-                    //EasyLogOut.Write(m_lastStart.ToString(Formatting.Indented));
+                    EasyLogOut.Write(m_lastStart.ToString(Formatting.Indented));
                 }
             }
             catch (System.Exception ex)
