@@ -21,7 +21,7 @@ namespace BattleList.Base
     {
         private static object flag = new object();
 
-        private static string LOG_PATH = @".\Data\BattleList\run.log";
+        private static string baseLogPath = @".\Data\BattleList\run.log";
 
         public static void Write(object obj, LogLevel type = LogLevel.Info, string file = null)
         {
@@ -31,13 +31,19 @@ namespace BattleList.Base
                 {
                     if (file == null)   // 默认输出到应用目录下
                     {
-                        file = LOG_PATH;//AppDomain.CurrentDomain.BaseDirectory + DateTime.Now.ToString("yyyy_MM_dd") + ".log";
+                        file = baseLogPath;//AppDomain.CurrentDomain.BaseDirectory + DateTime.Now.ToString("yyyy_MM_dd") + ".log";
                     }
                     string head = string.Format(">>>{0}[{1}]", DateTime.Now.ToString("HH:mm:ss.fff"), type.ToString());
                     File.AppendAllText(file, head + obj.ToString() + "\r\n");
                 }
             });
         }
+
+        public static void SetFileName(string logPath)
+        {
+            baseLogPath = logPath;
+        }
+
     }
 }
 

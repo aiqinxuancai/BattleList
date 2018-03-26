@@ -7,7 +7,7 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="BattleList" Height="500" Width="800" EnableDWMDropShadow="True" WindowStartupLocation="CenterScreen">
+        Title="BattleList" Height="500" Width="800" EnableDWMDropShadow="True" WindowStartupLocation="CenterScreen" Icon="Resources/fish-icon-w.png">
 
     <!--<Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands Foreground="White">
