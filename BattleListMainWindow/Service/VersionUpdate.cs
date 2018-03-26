@@ -60,7 +60,7 @@ namespace BattleListMainWindow.Service
             nameValue.Set("eoversion", GetElectronicObserverVersion());
             var data = webClient.UploadValues("http://ver.moehex.com/battlelist.php", "POST", nameValue);
             var dataString = System.Text.Encoding.UTF8.GetString(data);
-            Thread.Sleep(1000 * 5);
+            //Thread.Sleep(1000 * 5);
             return dataString;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,10 @@ namespace BattleListMainWindow.Service
                         file = baseLogPath;//AppDomain.CurrentDomain.BaseDirectory + DateTime.Now.ToString("yyyy_MM_dd") + ".log";
                     }
                     string head = string.Format(">>>{0}[{1}]", DateTime.Now.ToString("HH:mm:ss.fff"), type.ToString());
+
+                    Debug.WriteLine(head + obj.ToString());
+                
+
                     File.AppendAllText(file, head + obj.ToString() + "\r\n");
                 }
             });
