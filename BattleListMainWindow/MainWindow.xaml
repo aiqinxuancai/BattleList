@@ -1,4 +1,4 @@
-﻿<Controls:MetroWindow x:Class="BattleListMainWindow.MainWindow"
+﻿<Controls:MetroWindow x:Name="mainWindow" x:Class="BattleListMainWindow.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,17 +7,18 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="BattleList" Height="500" Width="800" EnableDWMDropShadow="True" WindowStartupLocation="CenterScreen" Icon="Resources/fish-icon-w.png">
+        Title="BattleList" Height="500" Width="800" EnableDWMDropShadow="True" WindowStartupLocation="CenterScreen" Icon="Resources/fish-icon-w.png" Loaded="mainWindow_Loaded">
 
-    <!--<Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands Foreground="White">
-            <Button x:Name="buttonStatisticalData" ToolTip="统计数据" Click="buttonStatisticalData_Click">
+            <!--<Button x:Name="buttonStatisticalData" ToolTip="统计数据" Click="buttonStatisticalData_Click">
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="ChartLine" />
                 </StackPanel>
-            </Button>
+            </Button>-->
+            <Button x:Name="buttonUpdate" ToolTip="" Click="buttonUpdate_Click" Content="有新的版本！"></Button>
         </Controls:WindowCommands>
-    </Controls:MetroWindow.RightWindowCommands>-->
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroWindow.Flyouts>
         <Controls:FlyoutsControl x:Name="flyoutsControl">

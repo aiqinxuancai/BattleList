@@ -123,7 +123,7 @@ namespace BattleList
             }
             catch (System.Exception ex)
             {
-                EasyLogOut.Write(data);
+                EasyLogOut.Write(ex);
             }
         }
 

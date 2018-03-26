@@ -35,7 +35,7 @@ namespace BattleListMainWindow.Service
             }
             catch (System.Exception ex)
             {
-                
+                EasyLogOut.Write(ex, LogLevel.Error);
             }
         }
 
@@ -52,6 +52,7 @@ namespace BattleListMainWindow.Service
             }
             catch (System.Exception ex)
             {
+                EasyLogOut.Write(ex, LogLevel.Error);
                 return null;
             }
         }

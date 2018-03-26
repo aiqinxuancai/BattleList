@@ -37,6 +37,12 @@ namespace BattleListMainWindow
 
                 File.Copy(@"..\x64\SQLite.Interop.dll", @".\x64\SQLite.Interop.dll");
             }
+
+            if (Directory.Exists(@".\Data\BattleList") == false)
+            {
+                Directory.CreateDirectory(@".\Data\BattleList");
+            }
+
         }
     }
 }

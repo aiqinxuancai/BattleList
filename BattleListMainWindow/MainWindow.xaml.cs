@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace BattleListMainWindow
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        private BattleListManager battleListManager ;
+        //private BattleListManager battleListManager ;
 
         private SQLiteShowList sqliteShowList;
 
@@ -34,16 +35,30 @@ namespace BattleListMainWindow
         {
             InitializeComponent();
 
+            EasyLogOut.Write("BattleListMainWindow:Start");
+            LoadData();
+
+            
+
+        }
+
+
+
+
+        private void LoadData()
+        {
+
             sqliteShowList = new SQLiteShowList();
             sqliteShowList.Init();
 
             //生成Load层
             Grid gridLoading = new Grid
             {
-                Background =  new SolidColorBrush(Colors.White)
+                Background = new SolidColorBrush(Colors.White)
             };
 
-            TextBlock textBlockLoad = new TextBlock {
+            TextBlock textBlockLoad = new TextBlock
+            {
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 FontSize = 16,
@@ -51,20 +66,22 @@ namespace BattleListMainWindow
             };
 
             gridLoading.Children.Add(textBlockLoad);
-            
+
             this.gridMain.Children.Add(gridLoading);
 
             //载入数据
-            Task.Run(() => {
+            Task.Run(() =>
+            {
                 DataView dataView = sqliteShowList.LoadData();
-                this.Dispatcher.Invoke(() => {
+                this.Dispatcher.Invoke(() =>
+                {
                     dataGridMain.ItemsSource = dataView;
                     this.gridMain.Children.Remove(gridLoading);
                 });
 
             });
-
         }
+
 
 
 
@@ -93,6 +110,34 @@ namespace BattleListMainWindow
 
             textBlockBattleInfo.Text = info;
             this.ToggleFlyout(0);
+        }
+
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            buttonUpdate.Visibility = Visibility.Collapsed;
+            Task.Run(() => {
+                bool canUpdate = VersionUpdate.HasUpdate();
+                if (canUpdate)
+                {
+                    this.Dispatcher.Invoke(() => { buttonUpdate.Visibility = Visibility.Visible; });
+                }
+            });
+        }
+
+
+        private void buttonUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+	            if (VersionUpdate.m_updateCheckJson?.Property("url") != null)
+	            {
+	                Process.Start(VersionUpdate.m_updateCheckJson["url"].ToString());
+	            }
+            }
+            catch (System.Exception ex)
+            {
+                EasyLogOut.Write(ex, LogLevel.Error);
+            }
         }
     }
 }

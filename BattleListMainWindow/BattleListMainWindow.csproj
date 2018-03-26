@@ -94,6 +94,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Service\EasyLogOut.cs" />
+    <Compile Include="Service\HttpHelper.cs" />
+    <Compile Include="Service\VersionUpdate.cs" />
     <Compile Include="Service\SQLiteShowList.cs.cs" />
     <Page Include="Base\StyleLinkButton.xaml">
       <Generator>MSBuild:Compile</Generator>
