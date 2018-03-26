@@ -19,7 +19,7 @@ namespace BattleListMainWindow.Service
         {
             try
             {
-                if (File.Exists(@".\list.sqlite"))
+                if (File.Exists(@".\list.sqlite")) 
                 {
                     m_sqliteConnection = new SQLiteConnection(@"data source=.\list.sqlite");
                 }

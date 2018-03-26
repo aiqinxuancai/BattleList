@@ -183,18 +183,14 @@ namespace BattleList
                     DeckName = deckName,
                     FullBattleData = fullBattleData
                 };
-                m_battleList.Insert(0, data);
+
+                //输出sqlite格式
                 sqliteSaveList.AddData(data);
-                //JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings();
-                //jsonSerializerSettings.Error += OnError;
-                //JsonConvert.SerializeObject(bm, jsonSerializerSettings);
 
-                //var jsonStringFromObj = Codeplex.Data.DynamicJson.Serialize(bm);
-                
+                ////输出Json格式
+                //m_battleList.Insert(0, data);
+                //SaveData();
 
-                SaveData();
-
-                //EasyLogOut.Write(fullBattleData);
 
                 return true;
             }
