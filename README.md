@@ -10,6 +10,6 @@
 
 
 ## 截图
-![1](https://github.com/aiqinxuancai/BattleList/tree/master/image/1.png)
-![2](https://github.com/aiqinxuancai/BattleList/tree/master/image/2.png)
-![3](https://github.com/aiqinxuancai/BattleList/tree/master/image/3.png)
+![1](https://github.com/aiqinxuancai/BattleList/blob/master/image/1.png)
+![2](https://github.com/aiqinxuancai/BattleList/blob/master/image/2.png)
+![3](https://github.com/aiqinxuancai/BattleList/blob/master/image/3.png)
