@@ -170,15 +170,13 @@ namespace BattleList
 
                 string mapPointName = isBoss ? point + "(Boss)" : point.ToString();
 
-                
-
 
                 dynamic json = Codeplex.Data.DynamicJson.Parse(root.ToString());
-                if ((int)json.api_get_flag[2] != 0)
+                if ((int)json.api_get_flag[0] != 0)
                 {
-                    var slotItemId = (int)json.api_get_slotitem.api_slotitem_id;
-                    ElectronicObserver.Data.EquipmentDataMaster eq = ElectronicObserver.Data.KCDatabase.Instance.MasterEquipments[slotItemId];
-                    shipName = shipName == string.Empty ? eq.Name : shipName + " + " + eq.Name;
+                    var useItemId = (int)json.api_get_useitem.api_useitem_id;
+                    var itemmaster = ElectronicObserver.Data.KCDatabase.Instance.MasterUseItems[useItemId];
+                    shipName = shipName == string.Empty ? itemmaster?.Name : shipName + " + " + itemmaster?.Name;
                 }
 
                 ElectronicObserver.Data.KCDatabase db = ElectronicObserver.Data.KCDatabase.Instance;
