@@ -154,7 +154,8 @@ namespace BattleList
                 }
 
                 Debug.WriteLine("战斗结果");
-            
+                EasyLogOut.Write(root);
+
                 string shipName = root.SelectToken("api_get_ship.api_ship_name")?.ToObject<string>();
                 int point = m_lastStart["api_no"].Value<int>();
                 string mapId = m_lastStart["api_maparea_id"] + "-" + m_lastStart["api_mapinfo_no"]; //3-2
