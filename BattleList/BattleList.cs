@@ -161,11 +161,24 @@ namespace BattleList
                 bool isBoss = m_lastStart["api_no"].Value<int>() == m_lastStart["api_bosscell_no"].Value<int>();
 
 
+                
+
                 string mapName = root.SelectToken("api_quest_name")?.ToObject<string>() + $"({mapId})";
                 string winRank = root.SelectToken("api_win_rank")?.ToObject<string>();
                 string deckName = root.SelectToken("api_enemy_info.api_deck_name")?.ToObject<string>();
 
                 string mapPointName = isBoss ? point + "(Boss)" : point.ToString();
+
+                
+
+
+                dynamic json = Codeplex.Data.DynamicJson.Parse(root.ToString());
+                if ((int)json.api_get_flag[2] != 0)
+                {
+                    var slotItemId = (int)json.api_get_slotitem.api_slotitem_id;
+                    ElectronicObserver.Data.EquipmentDataMaster eq = ElectronicObserver.Data.KCDatabase.Instance.MasterEquipments[slotItemId];
+                    shipName = shipName == string.Empty ? eq.Name : shipName + " + " + eq.Name;
+                }
 
                 ElectronicObserver.Data.KCDatabase db = ElectronicObserver.Data.KCDatabase.Instance;
                 ElectronicObserver.Data.Battle.BattleManager bm = db.Battle;

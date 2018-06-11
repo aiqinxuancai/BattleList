@@ -23,9 +23,9 @@ namespace BattleList
         public override string Version { get { return "<BUILD_VERSION>"; } }
 
 
-        private static string JSON_PATH = @".\Data\BattleList";
+        private static readonly string JSON_PATH = @".\Data\BattleList";
 
-        private static string MAINEXE_PATH = @".\Plugins\BattleListMainWindow.exe";
+        private static readonly string MAINEXE_PATH = @".\Plugins\BattleListMainWindow.exe";
 
         public Plugin()
         {
