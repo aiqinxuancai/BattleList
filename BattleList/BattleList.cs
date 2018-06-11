@@ -77,7 +77,7 @@ namespace BattleList
         {
             EasyLogOut.Write("Plugin:OnMapStart");
             Codeplex.Data.DynamicJson json = data;
-            //EasyLogOut.Write(data);
+            EasyLogOut.Write(data);
             try
             {
                 JObject root = JObject.Parse(json.ToString());
@@ -94,6 +94,7 @@ namespace BattleList
             EasyLogOut.Write("Plugin:OnMapNext");
             Codeplex.Data.DynamicJson json = data;
             //EasyLogOut.Write(data);
+            EasyLogOut.Write(json);
             try
             {
                 JObject root = JObject.Parse(json.ToString());
@@ -154,7 +155,7 @@ namespace BattleList
                 }
 
                 Debug.WriteLine("战斗结果");
-                EasyLogOut.Write(root);
+                EasyLogOut.Write(root.ToString(Formatting.Indented));
 
                 string shipName = root.SelectToken("api_get_ship.api_ship_name")?.ToObject<string>();
                 int point = m_lastStart["api_no"].Value<int>();
@@ -176,7 +177,7 @@ namespace BattleList
                 {
                     var useItemId = (int)json.api_get_useitem.api_useitem_id;
                     var itemmaster = ElectronicObserver.Data.KCDatabase.Instance.MasterUseItems[useItemId];
-                    shipName = shipName == string.Empty ? itemmaster?.Name : shipName + " + " + itemmaster?.Name;
+                    shipName = shipName == null || string.IsNullOrWhiteSpace(shipName) ? itemmaster?.Name : shipName + " + " + itemmaster?.Name;
                 }
 
                 ElectronicObserver.Data.KCDatabase db = ElectronicObserver.Data.KCDatabase.Instance;
