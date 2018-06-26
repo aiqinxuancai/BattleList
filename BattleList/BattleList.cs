@@ -36,6 +36,8 @@ namespace BattleList
         private JObject m_lastStart;
         private ArrayList m_battleList;
 
+        private List<int> m_battleBossIdList;
+
         public void Initialize(Plugin plugin)
         {
             EasyLogOut.Write("Plugin:初始化BattleList...");
@@ -82,6 +84,8 @@ namespace BattleList
             {
                 JObject root = JObject.Parse(json.ToString());
                 m_lastStart = root;
+                m_battleBossIdList.Clear();
+                m_battleBossIdList.Add(data.api_bosscell_no);
             }
             catch (System.Exception ex)
             {
@@ -102,6 +106,7 @@ namespace BattleList
                 if (m_lastStart != null)
                 {
                     m_lastStart.Merge(next); //合并点数据
+                    m_battleBossIdList.Add(data.api_bosscell_no);
                     //EasyLogOut.Write("合并Next完成");
                     //EasyLogOut.Write(m_lastStart.ToString(Formatting.Indented));
                 }
@@ -160,10 +165,9 @@ namespace BattleList
                 string shipName = root.SelectToken("api_get_ship.api_ship_name")?.ToObject<string>();
                 int point = m_lastStart["api_no"].Value<int>();
                 string mapId = m_lastStart["api_maparea_id"] + "-" + m_lastStart["api_mapinfo_no"]; //3-2
-                bool isBoss = m_lastStart["api_no"].Value<int>() == m_lastStart["api_bosscell_no"].Value<int>();
 
-
-                
+                bool isBoss = m_battleBossIdList.Exists(id => id == m_lastStart["api_no"].Value<int>()); //在每次Next的BossId中寻找
+                //m_lastStart["api_no"].Value<int>() == m_lastStart["api_bosscell_no"].Value<int>();
 
                 string mapName = root.SelectToken("api_quest_name")?.ToObject<string>() + $"({mapId})";
                 string winRank = root.SelectToken("api_win_rank")?.ToObject<string>();
