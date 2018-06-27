@@ -174,6 +174,8 @@ namespace BattleList
                 string deckName = root.SelectToken("api_enemy_info.api_deck_name")?.ToObject<string>();
 
                 string mapPointName = isBoss ? point + "(Boss)" : point.ToString();
+                //需要重新规划map的显示
+                //写出map的具体点位 使用poi的数据
 
 
                 dynamic json = Codeplex.Data.DynamicJson.Parse(root.ToString());
