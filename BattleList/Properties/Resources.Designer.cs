@@ -63,6 +63,16 @@ namespace BattleList.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
+        internal static byte[] map {
+            get {
+                object obj = ResourceManager.GetObject("map", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
         internal static byte[] SQLite_x64_Interop {
             get {
                 object obj = ResourceManager.GetObject("SQLite_x64_Interop", resourceCulture);

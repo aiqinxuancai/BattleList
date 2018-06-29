@@ -87,6 +87,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Service\MapPointService.cs" />
     <Compile Include="Service\SQLiteSaveList.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -98,6 +99,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Resources\map.json" />
     <None Include="Resources\SQLite_x64_Interop" />
     <None Include="Resources\SQLite_x86_Interop" />
   </ItemGroup>
