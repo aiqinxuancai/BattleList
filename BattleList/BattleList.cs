@@ -177,7 +177,8 @@ namespace BattleList
 
                 string shipName = root.SelectToken("api_get_ship.api_ship_name")?.ToObject<string>();
 
-                bool isBoss = m_battleBossIdList.Exists(id => id == m_lastStart["api_no"].Value<int>()); //在每次Next的BossId中寻找
+                bool isBoss = m_lastStart["api_event_id"]?.Value<int>() == 5;
+                    //m_battleBossIdList.Exists(id => id == m_lastStart["api_no"].Value<int>()); //在每次Next的BossId中寻找
 
                 //地图名及敌方信息
                 string mapName = root.SelectToken("api_quest_name")?.ToObject<string>() + $"({mapId})";
