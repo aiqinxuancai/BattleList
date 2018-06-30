@@ -44,6 +44,8 @@ namespace BattleList
 
             this.plugin = plugin;
 
+            m_battleBossIdList = new List<int>();
+
             sqliteSaveList = new SQLiteSaveList();
             sqliteSaveList.Init();
 
