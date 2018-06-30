@@ -162,21 +162,33 @@ namespace BattleList
                 Debug.WriteLine("战斗结果");
                 EasyLogOut.Write(root.ToString(Formatting.Indented));
 
-                string shipName = root.SelectToken("api_get_ship.api_ship_name")?.ToObject<string>();
-                int point = m_lastStart["api_no"].Value<int>();
+                //地图信息
+                int mapAreaId = m_lastStart["api_maparea_id"].ToObject<int>();
+                int mapInfoId = m_lastStart["api_mapinfo_no"].ToObject<int>();
+                int pointId = m_lastStart["api_no"].Value<int>();
                 string mapId = m_lastStart["api_maparea_id"] + "-" + m_lastStart["api_mapinfo_no"]; //3-2
 
-                bool isBoss = m_battleBossIdList.Exists(id => id == m_lastStart["api_no"].Value<int>()); //在每次Next的BossId中寻找
-                //m_lastStart["api_no"].Value<int>() == m_lastStart["api_bosscell_no"].Value<int>();
 
+                string shipName = root.SelectToken("api_get_ship.api_ship_name")?.ToObject<string>();
+
+                bool isBoss = m_battleBossIdList.Exists(id => id == m_lastStart["api_no"].Value<int>()); //在每次Next的BossId中寻找
+
+                //地图名及敌方信息
                 string mapName = root.SelectToken("api_quest_name")?.ToObject<string>() + $"({mapId})";
                 string winRank = root.SelectToken("api_win_rank")?.ToObject<string>();
                 string deckName = root.SelectToken("api_enemy_info.api_deck_name")?.ToObject<string>();
 
-                string mapPointName = isBoss ? point + "(Boss)" : point.ToString();
+
+                string pointName = MapPointService.GetMapPointName(mapAreaId, mapInfoId, pointId);
+                //综合建成point信息
+
+                var pointShow = (string.IsNullOrWhiteSpace(pointName) ? pointId.ToString() : pointName);
+
+                string mapPointName = isBoss ? pointShow + "(Boss)" : pointShow;
+
+                //string mapPointName = isBoss ? pointId + "(Boss)" : pointId.ToString();
                 //需要重新规划map的显示
                 //写出map的具体点位 使用poi的数据
-
 
                 dynamic json = Codeplex.Data.DynamicJson.Parse(root.ToString());
                 if ((int)json.api_get_flag[0] != 0)
@@ -194,7 +206,7 @@ namespace BattleList
                 {
                     Time = DateTime.Now,
                     MapName = mapName,
-                    MapPointId = point,
+                    MapPointId = pointId,
                     MapPointName = mapPointName,
                     NewShipName = shipName,
                     IsBoos = isBoss,

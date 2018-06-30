@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThemeVS2012Light", "Electro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleListMainWindow", "BattleListMainWindow\BattleListMainWindow.csproj", "{7FE079EA-331D-4710-8BD5-70B395B0BA59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleListTest", "BattleListTest\BattleListTest.csproj", "{6BDC1394-34E4-4634-B5E8-CAFE142413EB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleListTests", "BattleListTests\BattleListTests.csproj", "{9C720933-367B-4821-973A-C37D2A60E223}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,10 @@ Global
 		{7FE079EA-331D-4710-8BD5-70B395B0BA59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FE079EA-331D-4710-8BD5-70B395B0BA59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FE079EA-331D-4710-8BD5-70B395B0BA59}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BDC1394-34E4-4634-B5E8-CAFE142413EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BDC1394-34E4-4634-B5E8-CAFE142413EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BDC1394-34E4-4634-B5E8-CAFE142413EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BDC1394-34E4-4634-B5E8-CAFE142413EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C720933-367B-4821-973A-C37D2A60E223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C720933-367B-4821-973A-C37D2A60E223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C720933-367B-4821-973A-C37D2A60E223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C720933-367B-4821-973A-C37D2A60E223}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
