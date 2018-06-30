@@ -87,7 +87,9 @@ namespace BattleList
                 JObject root = JObject.Parse(json.ToString());
                 m_lastStart = root;
                 m_battleBossIdList.Clear();
-                m_battleBossIdList.Add(data.api_bosscell_no);
+
+                int bossId = (int)root.SelectToken(".api_bosscell_no")?.Value<int>();
+                m_battleBossIdList.Add(bossId);
             }
             catch (System.Exception ex)
             {
@@ -108,7 +110,9 @@ namespace BattleList
                 if (m_lastStart != null)
                 {
                     m_lastStart.Merge(next); //合并点数据
-                    m_battleBossIdList.Add(data.api_bosscell_no);
+
+                    int bossId = (int)root.SelectToken(".api_bosscell_no")?.Value<int>();
+                    m_battleBossIdList.Add(bossId);
                     //EasyLogOut.Write("合并Next完成");
                     //EasyLogOut.Write(m_lastStart.ToString(Formatting.Indented));
                 }
