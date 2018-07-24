@@ -35,7 +35,7 @@ namespace BattleListMainWindow
         {
             InitializeComponent();
 
-            this.Title = "BattleList " + "1.0.0.2";
+            this.Title = "BattleList " + "1.0.0.3";
 
 
             EasyLogOut.Write("BattleListMainWindow:Start");

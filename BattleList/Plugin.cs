@@ -20,7 +20,7 @@ namespace BattleList
     public class Plugin : ElectronicObserver.Window.Plugins.DialogPlugin
     {
         public override string MenuTitle => "BattleList";
-        public override string Version { get { return "1.0.0.2"; } }
+        public override string Version { get { return "1.0.0.3"; } }
 
 
         private static readonly string JSON_PATH = @".\Data\BattleList";
