@@ -23,9 +23,13 @@ namespace BattleListMainWindow.Service
                 {
                     m_sqliteConnection = new SQLiteConnection(@"data source=.\list.sqlite");
                 }
-                else
+                else if(File.Exists(SQLITE_PATH_LIST))
                 {
                     m_sqliteConnection = new SQLiteConnection("data source=" + SQLITE_PATH_LIST);
+                }
+                else if(File.Exists(@"..\Data\BattleList\list.sqlite"))
+                {
+                    m_sqliteConnection = new SQLiteConnection("data source=" + @"..\Data\BattleList\list.sqlite");
                 }
 
                 if (m_sqliteConnection.State != System.Data.ConnectionState.Open)

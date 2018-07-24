@@ -20,7 +20,7 @@ namespace BattleList
     public class Plugin : ElectronicObserver.Window.Plugins.DialogPlugin
     {
         public override string MenuTitle => "BattleList";
-        public override string Version { get { return "<BUILD_VERSION>"; } }
+        public override string Version { get { return "1.0.0.2"; } }
 
 
         private static readonly string JSON_PATH = @".\Data\BattleList";
@@ -38,15 +38,45 @@ namespace BattleList
 
             if (Directory.Exists(@".\x64") == false)
             {
+                EasyLogOut.Write("Plugin:SQLiteDLL释放x64");
                 Directory.CreateDirectory(@".\x64");
-                File.WriteAllBytes(@".\x64\SQLite.Interop.dll", Properties.Resources.SQLite_x64_Interop);
             }
             if (Directory.Exists(@".\x86") == false)
             {
+                EasyLogOut.Write("Plugin:SQLiteDLL释放x86");
                 Directory.CreateDirectory(@".\x86");
-                File.WriteAllBytes(@".\x86\SQLite.Interop.dll", Properties.Resources.SQLite_x86_Interop);
             }
 
+            if (Directory.Exists(@".\Plugins\x64") == false)
+            {
+                EasyLogOut.Write("Plugin:SQLiteDLL释放x64Plugins");
+                Directory.CreateDirectory(@".\Plugins\x64");
+            }
+
+            if (Directory.Exists(@".\Plugins\x86") == false)
+            {
+                EasyLogOut.Write("Plugin:SQLiteDLL释放x86Plugins");
+                Directory.CreateDirectory(@".\Plugins\x86");
+            }
+
+
+            if (File.Exists(@".\Plugins\x86\SQLite.Interop.dll") == false)
+            {
+                File.WriteAllBytes(@".\Plugins\x86\SQLite.Interop.dll", Properties.Resources.SQLite_x86_Interop);
+            }
+            if (File.Exists(@".\Plugins\x64\SQLite.Interop.dll") == false)
+            {
+                File.WriteAllBytes(@".\Plugins\x64\SQLite.Interop.dll", Properties.Resources.SQLite_x64_Interop);
+            }
+
+            if (File.Exists(@".\x64\SQLite.Interop.dll") == false)
+            {
+                File.WriteAllBytes(@".\Plugins\x64\SQLite.Interop.dll", Properties.Resources.SQLite_x64_Interop);
+            }
+            if (File.Exists(@".\x86\SQLite.Interop.dll") == false)
+            {
+                File.WriteAllBytes(@".\Plugins\x86\SQLite.Interop.dll", Properties.Resources.SQLite_x86_Interop);
+            }
 
             Task.Factory.StartNew(() => BattleList.Instance.Initialize(this));
         }
