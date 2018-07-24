@@ -71,11 +71,11 @@ namespace BattleList
 
             if (File.Exists(@".\x64\SQLite.Interop.dll") == false)
             {
-                File.WriteAllBytes(@".\Plugins\x64\SQLite.Interop.dll", Properties.Resources.SQLite_x64_Interop);
+                File.WriteAllBytes(@".\x64\SQLite.Interop.dll", Properties.Resources.SQLite_x64_Interop);
             }
             if (File.Exists(@".\x86\SQLite.Interop.dll") == false)
             {
-                File.WriteAllBytes(@".\Plugins\x86\SQLite.Interop.dll", Properties.Resources.SQLite_x86_Interop);
+                File.WriteAllBytes(@".\x86\SQLite.Interop.dll", Properties.Resources.SQLite_x86_Interop);
             }
 
             Task.Factory.StartNew(() => BattleList.Instance.Initialize(this));
